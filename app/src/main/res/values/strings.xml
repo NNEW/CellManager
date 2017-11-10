@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CellManager</string>
+    <string name="title_activity_self_care">SelfCareActivity</string>
 </resources>
