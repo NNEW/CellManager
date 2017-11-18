@@ -12,7 +12,7 @@ public class Setting extends AppCompatActivity {
         setContentView(R.layout.activity_setting);
     }
 
-    private boolean ToggleNotiCheck() {}
-    private boolean ToggleAccountCheck() {}
-    private boolean ToggleWidgetCheck() {}
+    private boolean ToggleNotiCheck() {return false;}
+    private boolean ToggleAccountCheck() {return false;}
+    private boolean ToggleWidgetCheck() {return false;}
 }

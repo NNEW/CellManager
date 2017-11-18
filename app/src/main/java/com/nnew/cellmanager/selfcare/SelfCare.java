@@ -11,8 +11,8 @@ public class SelfCare extends AppCompatActivity {
 
     protected void DevelopSelfCare() {}
 
-    public static int get_cell_num() {}
-    public static int set_cell_num() {}
-    public int get_exp_num() {}
-    public int set_exp_num() {}
+    public static int get_cell_num() {return 0;}
+    public static int set_cell_num() {return 0;}
+    public int get_exp_num() {return 0;}
+    public int set_exp_num() {return 0;}
 }

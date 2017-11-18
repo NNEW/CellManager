@@ -16,6 +16,6 @@ public class Notification extends AppCompatActivity {
 
     private void NotifyInfo() {}
 
-    public static boolean get_noti_status() {}
-    public static boolean set_noti_status() {}
+    public static boolean get_noti_status() {return false;}
+    public static boolean set_noti_status() {return false;}
 }

@@ -21,6 +21,6 @@ public class User extends AppCompatActivity {
     private void SignOutAccount() {}
     private void LinkAccount() {}
 
-    public static boolean get_account_link() {}
-    public static boolean set_account_link() {}
+    public static boolean get_account_link() {return false;}
+    public static boolean set_account_link() {return false;}
 }
