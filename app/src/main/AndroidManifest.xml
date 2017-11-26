@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.nnew.cellmanager">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -10,7 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission xmlns:tools="http://schemas.android.com/tools"
         android:name="android.permission.PACKAGE_USAGE_STATS"
-    tools:ignore="ProtectedPermissions" />
+        tools:ignore="ProtectedPermissions" />
 
     <application
         android:allowBackup="true"
@@ -20,11 +21,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".userpattern.UserPattern">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".selfcare.SelfCare" />
         <activity android:name=".setting.Setting" />
@@ -33,6 +29,14 @@
         <activity android:name=".selfcare.SelfCareBrain" />
         <activity android:name=".selfcare.SelfCareVisualization" />
         <activity android:name=".userpattern.UserPatternVisualization" />
-        <activity android:name=".setting.Widget"></activity>
+        <activity android:name=".setting.Widget" />
+        <activity android:name=".userpattern.Loading">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
+
 </manifest>
