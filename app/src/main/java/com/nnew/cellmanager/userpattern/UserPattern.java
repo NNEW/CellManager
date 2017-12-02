@@ -14,6 +14,7 @@ import android.util.Log;
 
 import com.nnew.cellmanager.R;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Calendar;
@@ -23,11 +24,13 @@ public class UserPattern extends AppCompatActivity {
     private static int anlysis_table;
     private static int category_table;
 
+    private ArrayList<String> rawData;
+
     private void GetUsageStat() {
         // GET_USAGE_STATS 권한 확인
         boolean granted = false;
         AppOpsManager appOps = (AppOpsManager) getApplication().getSystemService(Context.APP_OPS_SERVICE);
-        int mode = appOps.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,android.os.Process.myUid(), getApplication().getPackageName());
+        int mode = appOps.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, android.os.Process.myUid(), getApplication().getPackageName());
 
         if (mode == AppOpsManager.MODE_DEFAULT) {
             granted = (getApplication().checkCallingOrSelfPermission(android.Manifest.permission.PACKAGE_USAGE_STATS) == PackageManager.PERMISSION_GRANTED);
@@ -35,8 +38,7 @@ public class UserPattern extends AppCompatActivity {
             granted = (mode == AppOpsManager.MODE_ALLOWED);
         }
         Log.e("GRANT", "===== CheckPhoneState isRooting granted = " + granted);
-        if (granted == false)
-        {
+        if (granted == false) {
             // 권한이 없을 경우 권한 요구 페이지 이동
             Intent intent = new Intent(android.provider.Settings.ACTION_USAGE_ACCESS_SETTINGS);
             getApplication().startActivity(intent);
@@ -61,30 +63,60 @@ public class UserPattern extends AppCompatActivity {
         Log.e("####", "results daily for " + yesterdayCal.getTime().toLocaleString() + " - " + todayCal.getTime().toLocaleString());
 
         final DBHelper dbHelper = new DBHelper(getApplicationContext(), "AppCache.db", null, 1);
+        String tmp;
+        String tokens[];
         for (UsageStats app : queryUsageStats) {
-            int sec = ((int)app.getTotalTimeInForeground() / 1000);
+            tmp = "";
+            int sec = ((int) app.getTotalTimeInForeground() / 1000);
             int hour = sec / 3600;
             int min = (sec % 3600) / 60;
             sec %= 60;
-            Log.e("DOKY", dbHelper.getCategory(app.getPackageName()) + " | "  + hour + "시간 " + min + "분 " + sec + "초");
+
+            tokens = dbHelper.getCategory(app.getPackageName()).split("-");
+            tmp = tokens[1] + "//" + tokens[0] + "//" + app.getTotalTimeInForeground();
+            rawData.add(tmp);
+            Log.e("DOKY", dbHelper.getCategory(app.getPackageName()) + " | " + hour + "시간 " + min + "분 " + sec + "초");
         }
+
+        Intent intent = new Intent(getApplicationContext(), UserPatternVisualization.class);
+        intent.putStringArrayListExtra("rawData", rawData);
+        startActivity(intent);
+        finish();
     }
-    private void ClearUsage() {}
-    private void AnalyzeUsage() {}
 
-    private void AppendAnlysis() {}
-    private void ClearAnlysis() {}
+    private void ClearUsage() {
+    }
 
-    private static void set_usage_table() {}
-    private static void get_usage_table() {}
-    private static void set_anlysis_table() {}
-    private static void get_anlysis_table() {}
+    private void AnalyzeUsage() {
+    }
+
+    private void AppendAnlysis() {
+    }
+
+    private void ClearAnlysis() {
+    }
+
+    private static void set_usage_table() {
+    }
+
+    private static void get_usage_table() {
+    }
+
+    private static void set_anlysis_table() {
+    }
+
+    private static void get_anlysis_table() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         StrictMode.enableDefaults();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user);
+        //setContentView(R.layout.activity_user);
+
+        Log.e("DOKY", "UserPattern Start");
+
+        rawData = new ArrayList<String>();
 
         GetUsageStat();
         //new DBHelper(getApplicationContext(), "AppCache.db", null, 1).deleteAll();
